@@ -1,0 +1,25 @@
+const express = require('express');
+const router = express.Router();
+const reservationController = require('../controllers/reservationController');
+
+// Reservation CRUD routes
+router.post('/', reservationController.createReservation);
+router.get('/', reservationController.getAllReservations);
+
+// Reservation by customer
+router.get('/customer/:customer_id', reservationController.getReservationsByCustomer);
+
+// Reservation by restaurant
+router.get('/restaurant/:restaurant_id', reservationController.getReservationsByRestaurant);
+
+// Reservation status routes
+router.patch('/:id/confirm', reservationController.confirmReservation);
+router.patch('/:id/reject', reservationController.rejectReservation);
+router.patch('/:id/cancel', reservationController.cancelReservation);
+router.patch('/:id/complete', reservationController.completeReservation);
+
+router.get('/:id', reservationController.getReservationById);
+router.put('/:id', reservationController.updateReservation);
+router.delete('/:id', reservationController.deleteReservation);
+
+module.exports = router;
